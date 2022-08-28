@@ -36,3 +36,40 @@
     transform: rotate(360deg);
   }
 }
+
+*{
+  margin: 0 ;
+  padding: 0 ;
+  box-sizing: border-box !important;
+}
+
+body{
+background-image: linear-gradient(to right, rgb(214, 9, 214), rgb(255, 128, 232), rgb(95, 95, 254));
+}
+
+.app-name{
+  color: #fbc261;
+  text-shadow: 10px 10px 12px #282c34 ;
+}
+
+.input-group{
+  border-radius: 15px;
+  box-shadow: 10px 10px 25px 10px #282c34 !important;
+}
+
+.todoapp-input{
+  background-color: rgb(245, 195, 247);
+  border: none;
+  
+}
+
+.btn-add{
+  background-color: rgb(132, 100, 237);
+  border: none;
+}
+
+.btn-add:hover{
+  background-color: #282c34;
+  color: antiquewhite;
+  border: none;
+}

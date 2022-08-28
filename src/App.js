@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [toDoText, setToDoText] = useState("");
+
+	const handleSubmit = (event) => {
+		event.preventDefault(); /* EVENT'in default değeri başka sayfaya yönlendirmektir (formdaki event değeri) prevent.default diyerek bu önlenir */
+
+		if (toDoText === "") {
+			alert("This place can't be empty!!!");
+			return;
+		}
+
+		console.log(toDoText);
+	};
+	return (
+		<body>
+			<div className="container">
+				<h1 className="app-name text-center my-5"> TO DO APP </h1>
+				<form onSubmit={handleSubmit}>
+					<div className="input-group">
+						<input
+							value={toDoText}
+							type="text"
+							className="todoapp-input form-control"
+							placeholder="Please Write Your To Do List Items"
+							onChange={(event) => setToDoText(event.target.value)}
+						/>
+						<button className="btn-add btn" type="submit">
+							ADD ITEM
+						</button>
+					</div>
+				</form>
+			</div>
+		</body>
+	);
 }
 
 export default App;
