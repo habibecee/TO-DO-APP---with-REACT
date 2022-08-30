@@ -1,19 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
+import ToDo from "./ToDo";
+import Form from "./Form";
 
 function App() {
 	const [toDoText, setToDoText] = useState("");
 	const [todos, setTodos] = useState([]);
 	const [isEdit, setIsEdit] = useState(false);
 	const [willUpdateToDo, setWillUpdateToDo] = useState("");
+
+	useEffect(() => {
+		const todosFromLocalStorage = localStorage.getItem("todos");
+		console.log(todosFromLocalStorage);
+
+		if (todosFromLocalStorage === null) {
+			localStorage.setItem("todos", JSON.stringify([]));
+		} else {
+			setTodos(JSON.parse(todosFromLocalStorage));
+		}
+	}, []);
+
 	const deleteToDo = (id) => {
 		console.log(id);
 		const filteredToDos = todos.filter((item) => item.id !== id);
 		setTodos(filteredToDos);
+		localStorage.setItem("todos", JSON.stringify(filteredToDos));
 	};
 
 	const changeIsDone = (id) => {
 		console.log(id);
+
 		const searchedTodo = todos.find((item) => item.id === id);
 		const updateToDo = {
 			...searchedTodo,
@@ -23,6 +39,7 @@ function App() {
 		const filteredToDos = todos.filter((item) => item.id !== id);
 		setTodos([updateToDo, ...filteredToDos]);
 		console.log(filteredToDos);
+		localStorage.setItem("todos", JSON.stringify(filteredToDos));
 	};
 
 	const handleSubmit = (event) => {
@@ -50,13 +67,14 @@ function App() {
 			};
 			const filteredToDos = todos.filter((item) => item.id !== willUpdateToDo);
 			setTodos([...filteredToDos, updatedToDo]);
+			localStorage.setItem("todos", JSON.stringify);
 			setToDoText("");
 			setIsEdit(false);
 			setWillUpdateToDo("");
 		} else {
 			const newToDo = {
 				id: new Date().getTime(),
-				isDone: false,
+				isDone: true,
 				text: toDoText,
 				date: new Date(),
 			};
@@ -64,85 +82,41 @@ function App() {
 				...todos,
 				newToDo,
 			]); /* new todoyu ekle, ...todos ise daha önceki tüm todo değerlerini de ekle demektir */
+			localStorage.setItem("todos", JSON.stringify([...todos, newToDo]));
 			setToDoText("");
 			console.log(newToDo);
 		}
 	};
 	return (
-		<body>
-			<div className="container">
-				<h1 className="app-name text-center my-5"> TO DO APP </h1>
-				<form onSubmit={handleSubmit}>
-					<div className="input-group">
-						<input
-							value={toDoText}
-							type="text"
-							className="todoapp-input form-control"
-							placeholder="Please Write Your To Do List Items"
-							onChange={(event) => setToDoText(event.target.value)}
-						/>
-						<button
-							className={`btn-add btn btn-${
-								isEdit === true ? "success" : "default"
-							}`}
-							type="submit"
-						>
-							{isEdit === true ? "Save Item" : "Add New Item"}
-						</button>
-					</div>
-				</form>
+		<div className="container">
+			<h1 className="app-name text-center my-5"> TO DO APP </h1>
 
-				{todos.length <= 0 ? (
-					<p className="any-text text-center my-5"> YOU HAVE ANY ITEMS YET. </p>
-				) : (
-					<>
-						<div className="list-div">
-							{todos.map((item) => (
-								<div
-									className={`items-div alert alert-${
-										item.isDone === true ? "warning" : "secondary"
-									} d-flex justify-content-between align-items-center`}
-									role="alert"
-								>
-									{/* {isEdit === true ? <input /> : <p> {item.text} </p>} */}
-									<p> {item.text} </p>
-									<div>
-										<button
-											className="btn btn-sm btn-danger"
-											onClick={() => deleteToDo(item.id)}
-										>
-											<i className="fa-solid fa-trash"></i>
-										</button>
-										<button
-											className="edit-btn btn btn-sm btn-secondary"
-											onClick={() => {
-												setIsEdit(true);
-												setWillUpdateToDo(item.id);
-												setToDoText(item.text);
-											}}
-										>
-											<i className="fa-solid fa-pen"></i>
-										</button>
-										<button
-											onClick={() => changeIsDone(item.id)}
-											className={`done-btn btn btn-sm btn-${
-												item.isDone === true ? "success" : "danger"
-											}`}
-										>
-											{item.isDone === false ? (
-												<i className="fa-solid fa-x"></i>
-											) : (
-												<i className="fa-solid fa-circle-check"></i>
-											)}
-										</button>
-									</div>
-								</div>
-							))}
-						</div>
-					</>
-				)}
-			</div>
-		</body>
+			<Form
+				handleSubmit={handleSubmit}
+				toDoText={toDoText}
+				setToDoText={setToDoText}
+				isEdit={isEdit}
+			/>
+
+			{todos.length <= 0 ? (
+				<p className="any-text text-center my-5"> YOU HAVE ANY ITEMS YET. </p>
+			) : (
+				<>
+					<div className="list-div">
+						{todos.map((item) => (
+							<ToDo
+								item={item}
+								deleteToDo={deleteToDo}
+								setIsEdit={setIsEdit}
+								setWillUpdateToDo={setWillUpdateToDo}
+								setToDoText={setToDoText}
+								changeIsDone={changeIsDone}
+							/>
+						))}
+					</div>
+				</>
+			)}
+		</div>
 	);
 }
 
