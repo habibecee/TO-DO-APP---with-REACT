@@ -103,9 +103,9 @@ body{
 .any-text{
   font-weight: bold;
   font-size: 2rem;
-  color: #feffdec7;
+  color: #bdfd33d0;
   /* color: #1b2a4a; */
-  text-shadow: 5px 5px 5px #2b1e5f  , 6px 5px 5px #7e2e7d,  7px 5px 5px #785924;
+  text-shadow: -5px -5px 5px #2b1e5f  , -5px 5px 5px #7e2e7d,  5px -5px 5px #785924;
 
 }
 
