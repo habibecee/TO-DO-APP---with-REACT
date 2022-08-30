@@ -99,7 +99,7 @@ function App() {
 			/>
 
 			{todos.length <= 0 ? (
-				<p className="any-text text-center my-5"> YOU HAVE ANY ITEMS YET. </p>
+				<p className="any-text text-center my-5"> YOU HAVE ANY ITEMS HERE. </p>
 			) : (
 				<>
 					<div className="list-div">
