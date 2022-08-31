@@ -8,7 +8,7 @@ Projede react companent kullanımları, funcion based methodu ve diğer başlang
 
 <p> Sitenin yayınlanmış haline aşağıdaki linkten ulaşabilirsiniz; </p>  </br>
 
-<a href='https://superb-arithmetic-13706f.netlify.app/ '  > TODO APP </a> </br>
+<a href='#'  > TODO APP </a> </br>
 
 <h3> SİTE GÖRÜNÜMÜ </h3>
 

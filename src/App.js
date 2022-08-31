@@ -31,15 +31,19 @@ function App() {
 		console.log(id);
 
 		const searchedTodo = todos.find((item) => item.id === id);
+
 		const updateToDo = {
 			...searchedTodo,
 			isDone: !searchedTodo.isDone,
 		};
 
 		const filteredToDos = todos.filter((item) => item.id !== id);
-		setTodos([updateToDo, ...filteredToDos]);
+		setTodos([...filteredToDos, updateToDo]);
 		console.log(filteredToDos);
-		localStorage.setItem("todos", JSON.stringify(filteredToDos));
+		localStorage.setItem(
+			"todos",
+			JSON.stringify([updateToDo, ...filteredToDos])
+		);
 	};
 
 	const handleSubmit = (event) => {
@@ -66,11 +70,14 @@ function App() {
 				text: toDoText,
 			};
 			const filteredToDos = todos.filter((item) => item.id !== willUpdateToDo);
-			setTodos([...filteredToDos, updatedToDo]);
-			localStorage.setItem("todos", JSON.stringify);
+			setTodos([updatedToDo, ...filteredToDos]);
 			setToDoText("");
 			setIsEdit(false);
 			setWillUpdateToDo("");
+			localStorage.setItem(
+				"todos",
+				JSON.stringify([updatedToDo, ...filteredToDos])
+			);
 		} else {
 			const newToDo = {
 				id: new Date().getTime(),
@@ -82,8 +89,8 @@ function App() {
 				...todos,
 				newToDo,
 			]); /* new todoyu ekle, ...todos ise daha önceki tüm todo değerlerini de ekle demektir */
-			localStorage.setItem("todos", JSON.stringify([...todos, newToDo]));
 			setToDoText("");
+			localStorage.setItem("todos", JSON.stringify([newToDo, ...todos]));
 			console.log(newToDo);
 		}
 	};
