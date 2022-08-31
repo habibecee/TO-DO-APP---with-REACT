@@ -12,4 +12,4 @@ Projede react companent kullanımları, funcion based methodu ve diğer başlang
 
 <h3> SİTE GÖRÜNÜMÜ </h3>
 
-![](../to%20do%20app/public/assets/todo-app-screen.gif) </br> </br>
+![](../public/assets/todo-app-screen.gif) </br> </br>
