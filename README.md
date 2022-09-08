@@ -12,4 +12,6 @@ Projede react companent kullanımları, funcion based methodu ve diğer başlang
 
 <h3> SİTE GÖRÜNÜMÜ </h3>
 
+![](./public/assets/screen.png) </br> </br>
+
 ![](./public/assets/todo-app-screen.gif) </br> </br>
